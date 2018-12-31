@@ -1,3 +1,5 @@
+[![Travis-CI Build Status](https://travis-ci.org/blasern/cornet.svg?branch=master)](https://travis-ci.org/blasern/cornet)
+
 # cornet: Correlation networks with R
 
 Correlation networks based on a correlation threshold can easily be built using the `corrr` and `ggraph` packages. Unfortunately the use a p-value threshold was not as straightforward. This package makes it easy to create correlation networks based on either correlation thresholds or p-value thresholds. 
