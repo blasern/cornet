@@ -37,7 +37,8 @@ correlation_edgelist <- function(
   
   # calculate correlations
   tidy_cors <- corrr::stretch(
-    corrr::correlate(data, use = use, method = correlation_method))
+    corrr::correlate(data, use = use, method = correlation_method, 
+                     quiet = TRUE))
   # remove na's
   tidy_cors <- tidy_cors[!is.na(tidy_cors$r), ]
   
