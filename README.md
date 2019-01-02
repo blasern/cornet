@@ -1,18 +1,49 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/blasern/cornet.svg?branch=master)](https://travis-ci.org/blasern/cornet)
 
-# cornet: Correlation networks with R
+cornet: Correlation networks with R
+===================================
 
-Correlation networks based on a correlation threshold can easily be built using the `corrr` and `ggraph` packages. Unfortunately the use a p-value threshold was not as straightforward. This package makes it easy to create correlation networks based on either correlation thresholds or p-value thresholds. 
+Correlation networks based on a correlation threshold can easily be built using the `corrr` and `ggraph` packages. Unfortunately the use a p-value threshold was not as straightforward. This package makes it easy to create correlation networks based on either correlation thresholds or p-value thresholds.
 
+Installation
+------------
 
-## Installation 
+You can install cornet from github with:
 
-To install the latest development version from github:
+``` r
+# install.packages("devtools")
+devtools::install_github("blasern/cornet")
+```
 
-    install.packages("devtools")
-    devtools::install_github("blasern/cornet")
+Example
+-------
 
-## Development
- 
-If you find issues, please [let me know](https://github.com/blasern/cornet/issues). 
-If you would like to contribute, please [create a pull request](https://github.com/blasern/cornet/compare).
+Let's have a look at a correlation network for the `mtcars` dataset.
+
+``` r
+require(cornet)
+require(ggraph)
+
+data('mtcars')
+graph_cors <- correlation_network(mtcars, 
+                                  correlation_method = 'pearson',
+                                  threshold = 0.05, 
+                                  threshold_method = 'pvalue', 
+                                  adjust = 'holm')
+
+set.seed(42)
+ggraph(graph_cors, layout = "graphopt") + 
+  geom_edge_link(aes(color = r), width = 1.3) +
+  geom_node_label(aes(label = name)) + 
+  scale_edge_colour_gradient2(limits = c(-1, 1)) +
+  theme_graph()
+```
+
+![](README-mtcars-1.png)
+
+Development
+-----------
+
+If you find issues, please [let me know](https://github.com/blasern/cornet/issues). If you would like to contribute, please [create a pull request](https://github.com/blasern/cornet/compare).

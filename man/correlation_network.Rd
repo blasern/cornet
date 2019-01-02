@@ -36,7 +36,8 @@ Correlation network as a tidy graph
 }
 \examples{
 data('mtcars')
-correlation_network(mtcars)
+graph_cors <- correlation_network(mtcars)
+graph_cors
 \dontrun{
 require(ggraph)
 set.seed(42)
