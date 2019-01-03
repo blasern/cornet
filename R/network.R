@@ -55,6 +55,6 @@ correlation_network <- function(
   # make graph
   graph_df <- tidygraph::as_tbl_graph(edgelist, directed = FALSE)
   tidygraph::activate(graph_df, 'nodes')
-  dplyr::right_join(graph_df, node_data, by = "name")
+  graph_df <- dplyr::right_join(graph_df, node_data, by = "name")
   return(graph_df)
 }

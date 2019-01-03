@@ -48,7 +48,10 @@ correlation_edgelist <- function(
       stats::p.adjust(apply(expand.grid(seq(ncol(data)), seq(ncol(data))), 1, 
                             function(ix){
                               if (ix[1] == ix[2]) return(NA)
-                              stats::cor.test(data[, ix[1]], data[, ix[2]], 
+                              x1 <- data[, ix[1], drop = TRUE]
+                              x2 <- data[, ix[2], drop = TRUE]
+                              if (sum(!(is.na(x1) | is.na(x2))) < 3) return(NA)
+                              stats::cor.test(x1, x2, 
                                               method = correlation_method)$p.value
                             }),
                       method = adjust),
